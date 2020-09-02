@@ -15,6 +15,7 @@ class App extends React.Component {
       this.handleRemove = this.handleRemove.bind(this)
       this.handleReset = this.handleReset.bind(this)
       this.addTodos = this.addTodos.bind(this)
+      this.handleStatus = this.handleStatus.bind(this)
 
   }
   
@@ -23,7 +24,7 @@ class App extends React.Component {
           const updatedTodos = prevState.todos.map(todo => {
               if (todo.id === id && todo.completed===false) {
                   // todo.completed = !todo.completed
-                  return {...todo,completed:!todo.completed}
+                  return {...todo,completed:!todo.completed,inprogress:false}
               }
               return todo
           })
@@ -37,7 +38,7 @@ class App extends React.Component {
         const updatedTodos = prevState.todos.map(todo => {
             if (todo.id === id ) {
                 // todo.completed = !todo.completed
-                return {...todo,completed:false}
+                return {...todo,completed:false,inprogress:false}
             }
             return todo
         })
@@ -46,16 +47,29 @@ class App extends React.Component {
         }
     })
   } 
-
+  handleStatus=(id)=> {
+    this.setState(prevState => {
+        const updatedTodos = prevState.todos.map(todo => {
+            if (todo.id === id ) {
+                // todo.completed = !todo.completed
+                return {...todo,inprogress:true}
+            }
+            return todo
+        })
+        return {
+            todos: updatedTodos
+        }
+    })
+  } 
   addTodos=(todo)=>{
     this.setState(prevState => {
         const idt = prevState.todos[prevState.todos.length-1].id ;
         // console.log( prevState.todos[prevState.todos.length-1].id,"id here")
-        let tcompleted = false;
         let temp = {
             id : idt+1,
             text : todo,
-            completed : tcompleted
+            completed : false,
+            inprogress : false
         }
         const updatedTodos = [...this.state.todos, temp];
         return {
@@ -75,7 +89,8 @@ class App extends React.Component {
   render() {
   const todoItems = this.state.todos.map((item) => {
     return(  
-    <TodoItem key={item.id} item={item} handleClick={this.handleClick} handleReset={this.handleReset} handleRemove={this.handleRemove}/>
+    <TodoItem key={item.id} item={item} handleClick={this.handleClick} handleReset={this.handleReset}
+            handleRemove={this.handleRemove} handleStatus={this.handleStatus}/>
     )
   })
       

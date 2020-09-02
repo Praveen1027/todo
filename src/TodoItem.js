@@ -1,5 +1,6 @@
 
 import React from "react"
+import Inprogress from "./inprogressList"
 
 function TodoItem(props) {
     const completedStyle = {
@@ -7,9 +8,12 @@ function TodoItem(props) {
         color: "green",
         textDecoration: "line-through"
     }
-    const myClick = () => {
-        alert("Task is started!");
+    const statusStyle = {
+        fontStyle: "Bold",
+        color: "Red",
+        paddingTop : 20,
     }
+
     
     return (
         
@@ -18,12 +22,10 @@ function TodoItem(props) {
             <div className="buttonload">    
                 <div style={props.item.completed ? completedStyle: null}>
                        {props.item.id}.  {props.item.text}
-                    <input 
-                    type="checkbox" 
-                    checked={props.item.completed} 
-                   
-                />
-                
+                    <input type="checkbox" checked={props.item.completed} />
+                    <h3 style={(props.item.inprogress &&!props.item.completed) ? statusStyle : null }>
+                       {(props.item.inprogress &&!props.item.completed) ?  <Inprogress /> : null}
+                    </h3>
                 </div>
                 
             </div>
@@ -32,9 +34,7 @@ function TodoItem(props) {
                 <table >
                     <tr>
                         <td> 
-                            <button  onClick={myClick} >
-                            initiate
-                            </button>
+                            <button onClick={() => props.handleStatus(props.item.id)} > initiate </button>
                         </td>
                         <td> 
                         <button  onClick={()=>props.handleClick(props.item.id)}>completed</button>
