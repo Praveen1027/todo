@@ -5,7 +5,7 @@ function Inprogress() {
     return(
         <div>
             Inprogress
-            <ClipLoader/>
+            <ClipLoader  size={10} />
         </div>
     )
 }

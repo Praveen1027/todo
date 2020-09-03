@@ -53,3 +53,16 @@ input[type=checkbox]:focus {
   padding: 10px 16px; /* Some padding */
   font-size: 12px /* Set a font size */
 }
+
+
+.form {
+  border: thin solid red;
+  padding: 2rem;
+  margin: 2rem;
+  display: flex;
+}
+ 
+.formtext {
+  font-size: medium;
+  color: greeen;
+}

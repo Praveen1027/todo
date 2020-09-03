@@ -23,9 +23,8 @@ export default class AddTodos extends React.Component {
    render(){
         return(
             <div>
-                <form id="modiji" onSubmit={this.handleSubmit} >
-                
-                        <input type="text" name="name" placeholder="ADD TASK here" onChange={this.handleChange} />
+                <form className="form" id="modiji" onSubmit={this.handleSubmit} >
+                        <input className ="formtext" type="text" name="name"  onChange={this.handleChange} />
                     
                     <input type="submit" value="Submit" />
                 </form>
